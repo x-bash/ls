@@ -3,10 +3,7 @@
 # author:       Li Junhao           l@x-cmd.com
 # license:      GPLv3
 
-# linux
-
 xrc os
-
 case "$(os name)" in
     darwin)
         xrc x_fs/darwin

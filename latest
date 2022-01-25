@@ -20,8 +20,11 @@ ___x_cmd_ls_app(){
     fi
 
     if ___x_cmd_is_interative_tty; then
-        # TODO: Add ui components
-        :
+        # TODO: Add ui components: grid.
+        # filter:
+        # list of all items
+        # select and show file info
+        ___x_cmd_ls_bin -G "$@"
     else
         # TODO: Add theme code
         ___x_cmd_ls_bin -G "$@"

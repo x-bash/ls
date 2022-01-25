@@ -5,8 +5,22 @@
 
 # 1. ls local device
 # 2. change to different arguments, like ls :ali/ip, means ali ip ls
+
+
+if [ -z "$ZSH_VERSION" ]; then
+    ___x_cmd_ls_bin(){ command ls "$@"; }
+else
+    ___x_cmd_ls_bin(){ builtin ls "$@"; }
+fi
+
 ___x_cmd_ls_app(){
-    :
+    if [ -t 1 ]; then
+        ___x_cmd_ls_bin "$@"
+        return
+    fi
+
+    # TODO: Add theme code
+    ___x_cmd_ls_bin -G "$@"
 }
 
 ___x_cmd_ls(){

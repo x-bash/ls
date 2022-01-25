@@ -19,8 +19,14 @@ ___x_cmd_ls_app(){
         return
     fi
 
-    # TODO: Add theme code
-    ___x_cmd_ls_bin -G "$@"
+    if ___x_cmd_is_interative_tty; then
+        # TODO: Add ui components
+        :
+    else
+        # TODO: Add theme code
+        ___x_cmd_ls_bin -G "$@"
+    fi
+
 }
 
 ___x_cmd_ls(){

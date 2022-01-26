@@ -14,59 +14,10 @@ else
 fi
 
 ___x_cmd_ls_app(){
-    if [ ! -t 1 ]; then
-        ___x_cmd_ls_bin "$@"
-        return
+    if ! xrc ls/lib/app; then
+        return 1
     fi
-
-    if ! ___x_cmd_is_interative_tty; then
-        ___x_cmd_ls_bin -G "$@"
-    fi
-
-    # TODO: Add ui components: grid.
-    # filter:
-    # list of all items
-    # select and show file info
-    CLICOLOR_FORCE=1 ___x_cmd_ls_bin -G | awk -v width="$(ui cols)" '
-function str_remove_style(text){
-    gsub(/\033\[([0-9]+;)*[0-9]+m/, "", text)
-    return text
-}
-
-BEGIN{
-    max = 0
-}
-
-{
-    f[NR] = $1
-    a = str_remove_style($1)
-    # Using utf8
-    len = length(a)
-    # print len "\t" $1
-    s[NR] = len
-    if (max < len) max = len
-}
-
-END {
-    max = max + 2
-    col_num = int(width / max)
-    row_num = NR / col_num
-    if (row_num != int(row_num)) {
-        row_num = int(row_num) + 1
-    }
-
-    for (i=1; i<=row_num; ++i) {
-        count = i
-        for (j=1; j<=col_num; ++j) {
-            printf("%s", f[count])
-            printf("%" (max - s[count]) "s", "")
-            count = count + row_num
-        }
-        printf("\n")
-    }
-}
-'
-
+    ___x_cmd_ls_app "$@"
 }
 
 ___x_cmd_ls(){
@@ -76,7 +27,20 @@ ___x_cmd_ls(){
             :cpu)                                       x os cpu ;;
             :mem)                                       x os mem ;;
             :proc|:ps)                                  x os ps ;;
-            *)                                          ___x_cmd_ls_app "$@" ;;
+            *)
+
+            if [ ! -t 1 ]; then
+                ___x_cmd_ls_bin "$@"
+                return
+            fi
+
+            if ! ___x_cmd_is_interative_tty; then
+                ___x_cmd_ls_bin -G "$@"
+                return
+            fi
+
+            ___x_cmd_ls_app "$@"
+            ;;
         esac
     fi
 }

@@ -42,27 +42,30 @@ BEGIN{
     a = str_remove_style($1)
     # Using utf8
     len = length(a)
+    # print len "\t" $1
     s[NR] = len
     if (max < len) max = len
 }
 
 END {
+    max = max + 2
     col_num = int(width / max)
     row_num = NR / col_num
     if (row_num != int(row_num)) {
         row_num = int(row_num) + 1
     }
 
-    print max "\t" row_num "\t" col_num > "/dev/stderr"
-    exit(0)
+    # print max "\t" row_num "\t" col_num > "/dev/stderr"
+    # exit(0)
 
-    print "avg: " avg >"/dev/stderr"
     for (i=1; i<=row_num; ++i) {
         count = i
-        for (j=1; j<=col_num; ++i) {
-            printf("%" avg "s", f[count])
+        for (j=1; j<=col_num; ++j) {
+            printf("%s", f[count])
+            printf("%" (max - s[count]) "s", "")
             count = count + row_num
         }
+        printf("\n")
     }
 }
 '

@@ -55,9 +55,6 @@ END {
         row_num = int(row_num) + 1
     }
 
-    # print max "\t" row_num "\t" col_num > "/dev/stderr"
-    # exit(0)
-
     for (i=1; i<=row_num; ++i) {
         count = i
         for (j=1; j<=col_num; ++j) {

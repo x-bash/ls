@@ -27,7 +27,7 @@ ___x_cmd_ls_app(){
     # filter:
     # list of all items
     # select and show file info
-    CLICOLOR_FORCE=1 ls -G | awk '
+    CLICOLOR_FORCE=1 ___x_cmd_ls_bin -G | awk '
 function str_remove_style(text){
     gsub(/\033\[([0-9]+;)*[0-9]+m/, "", text)
     return text

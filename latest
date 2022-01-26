@@ -13,12 +13,7 @@ else
     ___x_cmd_ls_bin(){ builtin ls "$@"; }
 fi
 
-___x_cmd_ls_app(){
-    if ! xrc ls/lib/app; then
-        return 1
-    fi
-    ___x_cmd_ls_app "$@"
-}
+___x_cmd_lazyloading ___x_cmd_ls_app ls/lib/app
 
 ___x_cmd_ls(){
     if [ "$#" -eq 1 ]; then

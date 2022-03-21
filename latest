@@ -7,6 +7,7 @@
 # 2. change to different arguments, like ls :ali/ip, means ali ip ls
 
 
+# TODO: it is odd. ZSH does support command notation.
 if [ -z "$ZSH_VERSION" ]; then
     ___x_cmd_ls_bin(){ command ls "$@"; }
 else
@@ -22,6 +23,7 @@ ___x_cmd_ls(){
             :cpu)                                       x os cpu ;;
             :mem)                                       x os mem ;;
             :proc|:ps)                                  x os ps ;;
+            :path)                                      ;;
             *)
 
             if [ ! -t 1 ]; then

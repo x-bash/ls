@@ -14,8 +14,7 @@ ___x_cmd_ui_catsel_mainloop_awk(){
 }
 
 ___x_cmd_ui_catsel_mainloop_awk_exec(){
-    command awk \
-        "$@" \
+    command awk "$@" \
         -f "$___X_CMD_ROOT/awk/lib/default.awk" \
         -f "$___X_CMD_ROOT/awk/lib/str.awk" \
         -f "$___X_CMD_ROOT/awk/lib/wcwidth.awk" \

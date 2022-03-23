@@ -1,0 +1,13 @@
+
+case "$(x os name)" in
+    darwin)
+___x_cmd_ls_info_bin(){
+    otool -L "${1:?Provide binary}" | awk 'NR>1{ print $1 }'
+}
+    ;;
+    *)
+___x_cmd_ls_info_bin(){
+    ldd "${1:?Provide binary}" | awk '{ print $1 }'
+}
+    ;;
+esac

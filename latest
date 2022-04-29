@@ -24,26 +24,25 @@ ___x_cmd_ls(){
             :mem)                                       x os mem ;;
             :proc|:ps)                                  x os ps ;;
             :path)                                      ;;
+            @*|*@*/*)                                   ___x_cmd_hub_ls "$@" ;;
             *)
+                if [ ! -t 1 ]; then
+                    ___x_cmd_ls_bin "$@"
+                    return
+                fi
 
-            if [ ! -t 1 ]; then
-                ___x_cmd_ls_bin "$@"
-                return
-            fi
+                if ! ___x_cmd_is_interative_tty; then
+                    ___x_cmd_ls_bin -G "$@"
+                    return
+                fi
 
-            if ! ___x_cmd_is_interative_tty; then
-                ___x_cmd_ls_bin -G "$@"
-                return
-            fi
-
-            ___x_cmd_ui_catsel "$@"
             ;;
         esac
     fi
 }
 
 # TODO: Will be replaced by module ls
-___x_cmd_ls(){
+___x_cmd_ls_app(){
     case "$1" in
         @*|*@*/*)
             # TODO: using hub
@@ -52,6 +51,7 @@ ___x_cmd_ls(){
             ;;
     esac
     ___x_cmd_static_build_file exa exa   "$@"
+    # ___x_cmd_ui_catsel "$@"
 }
 
 xrc setmain ___x_cmd_ls

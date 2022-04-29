@@ -14,8 +14,3 @@ ___x_cmd_ls_cpu(){
 }
 
 esac
-
-
-
-
-sysctl -a | grep mach

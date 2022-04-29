@@ -21,29 +21,27 @@ xrc:mod:lib ls ls_mem ls_cpu ls_ps
 x log init ls
 
 ___x_cmd_ls(){
-    if [ "$#" -eq 1 ]; then
-        case "$1" in
-            :*.zip|:*.7z|:*.tar|:*.tar.Z|:*.tar.gz)     ___x_cmd_zuz_ls "${1#:}" ;;
-            :cpu)                                       shift; ___x_cmd_ls_cpu "$@" ;;
-            :mem)                                       shift; ___x_cmd_ls_mem "$@" ;;
-            :proc|:ps)                                  x os ps ;;
-            :path)                                      shift; ___x_cmd_path "$@" ;;
-            @*|*@*/*)                                   ___x_cmd_hub_ls "$@" ;;
-            *)
-                if [ ! -t 1 ]; then
-                    ___x_cmd_ls_bin "$@"
-                    return
-                fi
+    case "$1" in
+        :*.zip|:*.7z|:*.tar|:*.tar.Z|:*.tar.gz)     ___x_cmd_zuz_ls "${1#:}" ;;
+        :cpu)                                       shift; ___x_cmd_ls_cpu "$@" ;;
+        :mem)                                       shift; ___x_cmd_ls_mem "$@" ;;
+        :proc|:ps)                                  x os ps ;;
+        :path)                                      shift; ___x_cmd_path "$@" ;;
+        @*|*@*/*)                                   ___x_cmd_hub_ls "$@" ;;
+        *)
+            if [ ! -t 1 ]; then
+                ___x_cmd_ls_bin "$@"
+                return
+            fi
 
-                if ! ___x_cmd_is_interative_tty; then
-                    ___x_cmd_ls_bin -G "$@"
-                    return
-                fi
+            if ! ___x_cmd_is_interative_tty; then
+                ___x_cmd_ls_bin -G "$@"
+                return
+            fi
 
-                ___x_cmd_ls_app "$@"
-            ;;
-        esac
-    fi
+            ___x_cmd_ls_app "$@"
+        ;;
+    esac
 }
 
 # TODO: Will be replaced by module ls

@@ -36,6 +36,7 @@ ___x_cmd_ls(){
                     return
                 fi
 
+                ___x_cmd_ls_app "$@"
             ;;
         esac
     fi
@@ -43,13 +44,6 @@ ___x_cmd_ls(){
 
 # TODO: Will be replaced by module ls
 ___x_cmd_ls_app(){
-    case "$1" in
-        @*|*@*/*)
-            # TODO: using hub
-            ___x_cmd_hub_ls "$@"
-            return
-            ;;
-    esac
     ___x_cmd_static_build_file exa exa   "$@"
     # ___x_cmd_ui_catsel "$@"
 }

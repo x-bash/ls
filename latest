@@ -16,6 +16,8 @@ fi
 
 . "$___X_CMD_ROOT/ls/lib/catsel"
 
+x log init ls
+
 ___x_cmd_ls(){
     if [ "$#" -eq 1 ]; then
         case "$1" in

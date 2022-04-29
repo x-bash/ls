@@ -23,7 +23,7 @@ ___x_cmd_ls(){
             :cpu)                                       x os cpu ;;
             :mem)                                       x os mem ;;
             :proc|:ps)                                  x os ps ;;
-            :path)                                      ;;
+            :path)                                      shift; ___x_cmd_path "$@" ;;
             @*|*@*/*)                                   ___x_cmd_hub_ls "$@" ;;
             *)
                 if [ ! -t 1 ]; then

@@ -42,4 +42,16 @@ ___x_cmd_ls(){
     fi
 }
 
+# TODO: Will be replaced by module ls
+___x_cmd_ls(){
+    case "$1" in
+        @*|*@*/*)
+            # TODO: using hub
+            ___x_cmd_hub_ls "$@"
+            return
+            ;;
+    esac
+    ___x_cmd_static_build_file exa exa   "$@"
+}
+
 xrc setmain ___x_cmd_ls

@@ -46,7 +46,7 @@ ___x_cmd_ls(){
 
 # TODO: Will be replaced by module ls
 ___x_cmd_ls_app(){
-    ___x_cmd_static_build_file exa exa   "$@"
+    x exa  "$@"
     # ___x_cmd_ui_catsel "$@"
 }
 

@@ -16,8 +16,7 @@ fi
 
 x log init ls
 
-. "$___X_CMD_ROOT/ls/lib/catsel"
-xrc:mod:lib ls ls_mem ls_cpu ls_ps
+xrc:mod:lib ls      catsel ls_mem ls_cpu ls_ps
 
 
 ___x_cmd_ls(){
